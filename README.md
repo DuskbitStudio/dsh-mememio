@@ -71,6 +71,7 @@ client.js             Client：设置页（settings.section）
 locale/zh.json        插件管理器标题/描述（中文）
 locale/en.json        插件管理器标题/描述（英文）
 icon.svg              插件图标
+test/                 Node 内置测试（不参与运行时与打包）
 README.md             本文件
 ```
 
@@ -85,6 +86,14 @@ node --check client.js
 
 - 改 Host（`index.js`）后，重载 `include:dsh-mememio` 行生效。
 - 改 Client（`client.js`）后，刷新/重开设置页生效。
+
+## 测试
+
+```powershell
+npm test
+```
+
+覆盖 `expressionPrompt` 的候选复核、频率和严肃场景规则，以及 `normalizeConfig`、`normalizeMcpUrl`、`maskToken`。测试使用 Node 内置 `node:test`，不需要额外依赖，也不会连接 MeMeMio 或修改本机配置。
 
 ## 卸载
 

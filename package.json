@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "MeMeMio 表情包：连接 MeMeMio MCP，并让模型在情绪表达时自动挑图",
+  "scripts": {
+    "test": "node --test"
+  },
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

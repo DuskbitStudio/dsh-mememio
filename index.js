@@ -443,3 +443,6 @@ export function apply(ctx) {
   })
 }
 
+// 纯函数导出：供 node:test 使用，不参与 DSH 运行时契约。
+export { expressionPrompt, normalizeConfig, normalizeMcpUrl, maskToken }
+
