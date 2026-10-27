@@ -94,10 +94,19 @@ function expressionPrompt(config) {
     '## 表情包表达',
     '你可以使用 MeMeMio 的表情包工具。',
     `${frequency}适合配图的场景：${scenes}。`,
-    '需要配图时，调用 mcp__mememio__pick_meme_for_reply；message 传 10–20 字的意图摘要，'
-      + '例如“被需求折腾到无语”“庆祝一下”，然后把返回的图片放进回复里。',
+    '需要配图时，调用 mcp__mememio__pick_meme_for_reply：message 传 10–20 字的意图摘要'
+      + '（例如“被需求折腾到无语”“庆祝一下”），并传 inline=false、limit=5。',
+    '拿到结果后，先读 chosen 和 alternatives 的 description、ocrText、labels，'
+      + '再从中选一张最贴合当前语境的；不要默认直接用 chosen。',
+    '选中后，把该候选的 url 用 Markdown 图片语法放进回复（如 ![描述](url)）；'
+      + '不要用 thumbUrl，也不要为了选图再调用 search_memes 或 random_meme。',
+    '默认不要调用 get_meme_image。只有文字描述不足以判断时（例如两条候选难分、'
+      + '或担心图文不符），才对最终选中的那一张调用 mcp__mememio__get_meme_image'
+      + '（memeId 传该候选 id，inline=true）确认；确认后仍用该图的 url 发。'
+      + '每轮最多取图 1 次，不要对多个候选逐张取图。',
     '规则：',
-    '- 每轮最多 1 张；不要为了发而发；不要用图片替代文字。',
+    '- 每轮最多 1 张；每轮只调用一次 pick_meme_for_reply；不要为了发而发；'
+      + '不要用图片替代文字；如果所有候选都不贴合，就不发。',
     `- ${seriousRule}`,
     '- 用户明确说不要表情包时，不主动发。',
     '- 成人向内容不主动使用；是否可用由 MeMeMio 的内容范围设置决定。',
